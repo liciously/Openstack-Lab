@@ -4,9 +4,9 @@
 
 swift-ring-builder /etc/swift/account.builder create 12 3 1 
 
-swift-ring-builder /etc/swift/account.builder add r0z0-controller:6002/sdc 100
-swift-ring-builder /etc/swift/account.builder add r0z0-controller:6002/sdd 100
-swift-ring-builder /etc/swift/account.builder add r0z0-controller:6002/sde 100
+swift-ring-builder /etc/swift/account.builder add r0z0-storage:6002/sdc 100
+swift-ring-builder /etc/swift/account.builder add r0z0-storage:6002/sdd 100
+swift-ring-builder /etc/swift/account.builder add r0z0-storage:6002/sde 100
 
 swift-ring-builder /etc/swift/account.builder 
 swift-ring-builder /etc/swift/account.builder rebalance
@@ -15,9 +15,9 @@ swift-ring-builder /etc/swift/account.builder rebalance
 
 swift-ring-builder /etc/swift/container.builder create 12 3 1
 
-swift-ring-builder /etc/swift/container.builder add r0z0-controller:6001/sdc 100 
-swift-ring-builder /etc/swift/container.builder add r0z0-controller:6001/sdd 100 
-swift-ring-builder /etc/swift/container.builder add r0z0-controller:6001/sde 100
+swift-ring-builder /etc/swift/container.builder add r0z0-storage:6001/sdc 100 
+swift-ring-builder /etc/swift/container.builder add r0z0-storage:6001/sdd 100 
+swift-ring-builder /etc/swift/container.builder add r0z0-storage:6001/sde 100
 
 swift-ring-builder /etc/swift/container.builder
 swift-ring-builder /etc/swift/container.builder rebalance
@@ -26,12 +26,12 @@ swift-ring-builder /etc/swift/container.builder rebalance
 
 swift-ring-builder /etc/swift/object.builder create 12 3 1
 
-swift-ring-builder /etc/swift/object.builder add r0z0-controller:6000/sdc 100
-swift-ring-builder /etc/swift/object.builder add r0z0-controller:6000/sdd 100
-swift-ring-builder /etc/swift/object.builder add r0z0-controller:6000/sde 100
+swift-ring-builder /etc/swift/object.builder add r0z0-storage:6000/sdc 100
+swift-ring-builder /etc/swift/object.builder add r0z0-storage:6000/sdd 100
+swift-ring-builder /etc/swift/object.builder add r0z0-storage:6000/sde 100
 
-swift-ring-builder /etc/swift/container.builder
-swift-ring-builder /etc/swift/container.builder rebalance
+swift-ring-builder /etc/swift/object.builder
+swift-ring-builder /etc/swift/object.builder rebalance
 
 - ubah permission
 chown swift. /etc/swift/*.gz 
