@@ -3,20 +3,7 @@
 - install swift
 apt -y install swift swift-account swift-container swift-object xfsprogs 
 
-- create partition
-mkfs.xfs /dev/sdc
-mkfs.xfs /dev/sdd
-mkfs.xfs /dev/sde
-
-- mounting partition
-mkdir -p /srv/node/sdc
-mkdir -p /srv/node/sdd
-mkdir -p /srv/node/sde
-
-mount /dev/sdc /srv/node/sdc
-mount /dev/sdd /srv/node/sdd
-mount /dev/sde /srv/node/sde
-
+- change permission
 chown -R swift. /srv/node 
 
 - copy file ring 
