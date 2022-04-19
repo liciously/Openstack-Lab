@@ -15,9 +15,9 @@ swift-ring-builder /etc/swift/account.builder rebalance
 
 swift-ring-builder /etc/swift/container.builder create 12 3 1
 
-swift-ring-builder /etc/swift/container.builder add 172.16.4.117:6001/sdc 100 
-swift-ring-builder /etc/swift/container.builder add 172.16.4.117:6001/sdd 100 
-swift-ring-builder /etc/swift/container.builder add 172.16.4.117:6001/sde 100
+swift-ring-builder /etc/swift/container.builder add r0z0-172.16.4.117:6001/sdc 100 
+swift-ring-builder /etc/swift/container.builder add r0z0-172.16.4.117:6001/sdd 100 
+swift-ring-builder /etc/swift/container.builder add r0z0-172.16.4.117:6001/sde 100
 
 swift-ring-builder /etc/swift/container.builder
 swift-ring-builder /etc/swift/container.builder rebalance
