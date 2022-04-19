@@ -15,7 +15,7 @@ hostnamectl set-hostname controller
 10.30.100.1 controller
 
 - set date/timezone
-timedatectl set-timedate Asia/Jakarta
+timedatectl set-timezone Asia/Jakarta
 
 - install ntp server
 apt install chrony
