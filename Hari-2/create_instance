@@ -7,7 +7,7 @@ openstack flavor create --vcpus 1 --ram 2048 --disk 5 m1.small
 openstack network create --project admin --share --provider-network-type flat --provider-physical-network provider public 
 
 - create subnet
-openstack subnet create public-net --network public --project admin --subnet-range 172.16.3.0/24 --allocation-pool start=172.16.3.169,end=172.16.3.179 --gateway 172.16.3.1 --dns-nameserver 192.168.252.151 
+openstack subnet create public-net --network public --project admin --subnet-range 172.16.1.0/24 --allocation-pool start=172.16.1.169,end=172.16.1.179 --gateway 172.16.1.1 --dns-nameserver 192.168.252.151 
 
 - create security group
 openstack security group create SG_Compnet
