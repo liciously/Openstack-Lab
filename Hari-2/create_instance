@@ -17,7 +17,7 @@ ssh-keygen -t rsa -q -N ""
 openstack keypair create --public-key ~/.ssh/id_rsa.pub fandi_key
 
 - launch instance
-openstack server create --flavor m1.small --image cirros --security-group SG_Compnet --nic net-id=3872472e-4ac6-464b-8623-039e3dad8c91 --key-name fandi_key VM_Cirros 
+openstack server create --flavor m1.small --image cirros --security-group SG_Compnet --nic net-id=23bcbf79-d9ad-4c34-bbc3-bcbeeb876e94 --key-name fandi_key VM_Cirros 
 
 - allow rule icmp & ssh
 openstack security group rule create --protocol icmp --ingress SG_Compnet
