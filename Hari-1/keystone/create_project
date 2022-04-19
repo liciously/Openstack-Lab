@@ -1,6 +1,7 @@
 # On node controller
 
 - create project service
+openstack project create --domain default --description "Service Project" service
 openstack project create --domain default \
   --description "PS-Compnet Project" COMPNET
 
