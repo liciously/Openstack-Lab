@@ -19,7 +19,7 @@ hostnamectl set-hostname compute
 10.30.100.2 compute
 
 - set date/timezone
-timedatectl set-timedate Asia/Jakarta
+timedatectl set-timezone Asia/Jakarta
 
 - install ntp client
 apt install chrony
