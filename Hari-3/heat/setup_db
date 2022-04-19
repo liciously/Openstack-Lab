@@ -1,10 +1,14 @@
 # On node controller
 
 mysql
+
 CREATE DATABASE heat;
+
 GRANT ALL PRIVILEGES ON heat.* TO 'heat'@'localhost' \
   IDENTIFIED BY 'password';
+
 GRANT ALL PRIVILEGES ON heat.* TO 'heat'@'%' \
   IDENTIFIED BY 'password';
+
 flush privileges;
 
