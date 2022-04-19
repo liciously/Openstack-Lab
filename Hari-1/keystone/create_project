@@ -10,7 +10,9 @@ openstack project list
 - create user & role
 openstack user create --domain default \
 --password-prompt fandi
-openstack role add --project COMPNET --user fandi admin
+openstack role create admincompnet
+openstack role add --project admin --user fandi admincompnet
+
 
 - create auth login file
 vim fandi-rc
