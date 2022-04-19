@@ -1,5 +1,6 @@
 # On node storage
 
+#...cinder
 - install lvm
 apt install lvm2 thin-provisioning-tools
 
@@ -7,3 +8,26 @@ apt install lvm2 thin-provisioning-tools
 pvcreate /dev/sdb
 vgcreate cinder-volumes /dev/sdb
 
+- check volume
+vgs
+
+#...swift
+- install utility
+apt-get install xfsprogs rsync
+
+- create xfs partition
+mkfs.xfs /dev/sdc
+mkfs.xfs /dev/sdd
+mkfs.xfs /dev/sde
+
+- mounting
+mkdir -p /srv/node/sdc
+mkdir -p /srv/node/sdd
+mkdir -p /srv/node/sde
+
+mount /dev/sdc /srv/node/sdc
+mount /dev/sdd /srv/node/sdd
+mount /dev/sde /srv/node/sde
+
+- check mounting
+df -h

@@ -1,4 +1,5 @@
 # On node storage
+
 - update & upgrade
 apt clean all && apt update -y && apt upgrade -y
 apt autoremove
@@ -6,7 +7,7 @@ apt autoremove
 - add repository
 add-apt-repository cloud-archive:victoria
 
-- set static ens160 & ens192
+- set static ens160
 vim /etc/netplan/00-installer-config.yaml
 netplan apply
 
