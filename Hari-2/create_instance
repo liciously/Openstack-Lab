@@ -7,21 +7,21 @@ openstack flavor create --vcpus 1 --ram 2048 --disk 5 m1.small
 openstack network create --project admin --share --provider-network-type flat --provider-physical-network provider public 
 
 - create subnet
-openstack subnet create public-net --network public --project admin --subnet-range 192.168.112.0/24 --allocation-pool start=192.168.112.1,end=192.168.112.10 --gateway 192.168.112.254 --dns-nameserver 8.8.8.8 
+openstack subnet create public-net --network public --project admin --subnet-range 172.16.3.0/24 --allocation-pool start=172.16.3.169,end=172.16.3.179 --gateway 172.16.3.1 --dns-nameserver 192.168.252.151 
 
 - create security group
-openstack security group create SG_Rafi
+openstack security group create SG_Compnet
 
 - create keypair
 ssh-keygen -t rsa -q -N ""
-openstack keypair create --public-key ~/.ssh/id_rsa.pub rafi_key
+openstack keypair create --public-key ~/.ssh/id_rsa.pub fandi_key
 
 - launch instance
-openstack server create --flavor m1.small --image cirros --security-group SG_Rafi --nic net-id=$netID --key-name rafi_key VM_Cirros 
+openstack server create --flavor m1.small --image cirros --security-group SG_Compnet --nic net-id=3872472e-4ac6-464b-8623-039e3dad8c91 --key-name fandi_key VM_Cirros 
 
 - allow rule icmp & ssh
-openstack security group rule create --protocol icmp --ingress SG_Rafi
-openstack security group rule create --protocol tcp --dst-port 22:22 SG_Rafi 
+openstack security group rule create --protocol icmp --ingress SG_Compnet
+openstack security group rule create --protocol tcp --dst-port 22:22 SG_Compnet
 
 - open on vnc 
 openstack console url show VM_Cirros
