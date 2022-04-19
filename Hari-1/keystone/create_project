@@ -1,23 +1,8 @@
 # On node controller
 
-- create auth login file
-vim admin-rc
-#...
-export OS_PROJECT_DOMAIN_NAME=Default
-export OS_USER_DOMAIN_NAME=Default
-export OS_PROJECT_NAME=admin
-export OS_USERNAME=admin
-export OS_PASSWORD=password
-export OS_AUTH_URL=http://controller:5000/v3
-export OS_IDENTITY_API_VERSION=3
-export OS_IMAGE_API_VERSION=2
-export PS1='\u@\h \W(admin)\$ '
-#...
-source admin-rc
-
 - create project service
 openstack project create --domain default \
-  --description "Service Project" service
+  --description "IDN Project" IDN
 
 - check project
 openstack project list 
@@ -25,14 +10,13 @@ openstack project list
 - create user & role
 openstack user create --domain default \
 --password-prompt rafiryd
-openstack role create adminidn
-openstack role add --project admin --user rafiryd adminidn
+openstack role add --project IDN --user rafiryd admin
 
 - create auth login file
 vim rafiryd-rc
 export OS_PROJECT_DOMAIN_NAME=Default
 export OS_USER_DOMAIN_NAME=Default
-export OS_PROJECT_NAME=admin
+export OS_PROJECT_NAME=IDN
 export OS_USERNAME=rafiryd
 export OS_PASSWORD=@dmin123
 export OS_AUTH_URL=http://controller:5000/v3
@@ -40,3 +24,6 @@ export OS_IDENTITY_API_VERSION=3
 export OS_IMAGE_API_VERSION=2
 export PS1='\u@\h \W(rafiryd)\$ '
 source rafiryd-rc
+
+- verifikasi
+openstack project list
