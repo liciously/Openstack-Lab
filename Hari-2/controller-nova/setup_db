@@ -1,6 +1,7 @@
 # On node controller
 
 mysql
+
 CREATE DATABASE nova_api;
 CREATE DATABASE nova;
 CREATE DATABASE nova_cell0;
