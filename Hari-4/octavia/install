@@ -6,6 +6,7 @@ apt install octavia-api octavia-health-manager octavia-housekeeping \
 pip install --upgrade pyasn1-modules 
 
 - generate certificates ssl
+git clone https://opendev.org/openstack/octavia.git
 cd octavia/bin
 ./create_dual_intermediate_CA.sh
 
@@ -32,6 +33,47 @@ openstack security group rule create --protocol tcp --dst-port 22 lb-mgmt-sec-gr
 openstack security group rule create --protocol tcp --dst-port 9443 lb-mgmt-sec-grp
 openstack security group create lb-health-mgr-sec-grp
 openstack security group rule create --protocol udp --dst-port 5555 lb-health-mgr-sec-grp
+
+-create network
+openstack network create lb-mgmt-net
+
+OCTAVIA_MGMT_SUBNET=172.16.99.0/24
+OCTAVIA_MGMT_SUBNET_START=172.16.99.100
+OCTAVIA_MGMT_SUBNET_END=172.16.99.254
+OCTAVIA_MGMT_PORT_IP=172.16.99.2
+
+openstack network create lb-mgmt-net
+openstack subnet create --subnet-range $OCTAVIA_MGMT_SUBNET --allocation-pool \
+  start=$OCTAVIA_MGMT_SUBNET_START,end=$OCTAVIA_MGMT_SUBNET_END \
+  --network lb-mgmt-net lb-mgmt-subnet
+
+SUBNET_ID=$(openstack subnet show lb-mgmt-subnet -f value -c id)
+PORT_FIXED_IP="--fixed-ip subnet=$SUBNET_ID,ip-address=$OCTAVIA_MGMT_PORT_IP"
+
+MGMT_PORT_ID=$(openstack port create --security-group \
+  lb-health-mgr-sec-grp --device-owner Octavia:health-mgr \
+  --host=$(hostname) -c id -f value --network lb-mgmt-net \
+  $PORT_FIXED_IP octavia-health-manager-listen-port)
+
+MGMT_PORT_MAC=$(openstack port show -c mac_address -f value \
+  $MGMT_PORT_ID)
+
+sudo ip link add o-hm0 type veth peer name o-bhm0
+NETID=$(openstack network show lb-mgmt-net -c id -f value)
+BRNAME=brq$(echo $NETID|cut -c 1-11)
+sudo brctl addif $BRNAME o-bhm0
+sudo ip link set o-bhm0 up
+
+#get name brname and mac
+#root@controller octavia(octavia)# echo $BRNAME
+#brqc416d876-37
+#root@controller octavia(octavia)# echo $MGMT_PORT_MAC
+fa:16:3e:11:38:3f
+
+
+sudo ip link set dev o-hm0 address $MGMT_PORT_MAC
+sudo iptables -I INPUT -i o-hm0 -p udp --dport 5555 -j ACCEPT
+sudo dhclient -v o-hm0 -cf /etc/dhcp/octavia
 
 - create keypair
 openstack keypair create --public-key ~/.ssh/id_rsa.pub mykey
